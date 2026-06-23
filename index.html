@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Beleza com Identidade — Clínica de Estética com a Dra. Vanessa." />
+  <meta name="description" content="Beleza com Identidade — Clínica de Estética com a Dra. Vanessa. Realçar, nunca transformar." />
   <title>Beleza com Identidade — Dra. Vanessa</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,35 +14,33 @@
 </head>
 <body>
 
-  <div class="cursor" aria-hidden="true"></div>
-  <div class="cursor-dot" aria-hidden="true"></div>
-
   <!-- ════ NAV ════ -->
   <nav class="nav" aria-label="Navegação principal">
     <a href="#hero" class="nav-logo">Beleza com <em>Identidade</em></a>
     <ul class="nav-links" role="list">
       <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#equipe">Dra. Vanessa</a></li>
       <li><a href="#procedimentos">Procedimentos</a></li>
-      <li><a href="#galeria">Galeria</a></li>
-      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#galeria">Resultados</a></li>
       <li><a href="#localizacao">Localização</a></li>
     </ul>
     <a href="#agendar" class="nav-cta">Agendar</a>
-    <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <div class="drawer" role="dialog" aria-label="Menu">
     <a href="#sobre">Sobre</a>
+    <a href="#equipe">Dra. Vanessa</a>
     <a href="#procedimentos">Procedimentos</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#depoimentos">Depoimentos</a>
+    <a href="#galeria">Resultados</a>
     <a href="#localizacao">Localização</a>
     <a href="#agendar">Agendar</a>
   </div>
 
   <!-- ════ HERO ════ -->
-  <section id="hero" class="marble-bg" aria-label="Apresentação">
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <section id="hero" aria-label="Apresentação">
     <div class="hero-inner">
       <div class="hero-top">
         <span class="hero-mark">Clínica de Estética · Dra. Vanessa</span>
@@ -55,13 +53,15 @@
         <span class="hl-row"><span class="hl-word ident">Identidade</span></span>
       </h1>
 
+      <p class="hero-slogan">Realçar, nunca transformar.</p>
+
       <div class="hero-bottom">
         <div class="hero-actions">
           <a href="https://wa.me/5547990000000?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta." class="btn btn-fill" target="_blank" rel="noopener noreferrer">
             <span>Agendar pelo WhatsApp</span>
             <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="#procedimentos" class="btn btn-line"><span>Ver procedimentos</span></a>
+          <a href="#procedimentos" class="btn btn-line">Ver procedimentos</a>
         </div>
         <div class="hero-hint">
           <span>role para descobrir</span>
@@ -71,60 +71,69 @@
     </div>
   </section>
 
-  <!-- ════ FAIXA DE PROCEDIMENTOS (estática) ════ -->
-  <div class="proc-strip">
-    <div class="proc-strip-inner">
-      <div class="strip-item">Procedimento 01</div>
-      <div class="strip-item">Procedimento 02</div>
-      <div class="strip-item">Procedimento 03</div>
-      <div class="strip-item">Procedimento 04</div>
-    </div>
-  </div>
-
-  <!-- ════ SOBRE ════ -->
+  <!-- ════ SOBRE A CLÍNICA ════ -->
   <section id="sobre" aria-labelledby="sobre-t">
     <div class="sobre-visual reveal-l">
-      <div class="sobre-img"><div class="sobre-img-ph">aqui terá uma foto da<br />Dra. Vanessa ou da clínica</div></div>
-      <div class="sobre-badge">
-        <div class="sobre-badge-num" data-count="0">00</div>
-        <div class="sobre-badge-label">anos de experiência</div>
-      </div>
+      <div class="sobre-img"><div class="sobre-img-ph">aqui terá uma foto<br />da clínica</div></div>
       <div class="sobre-frame" aria-hidden="true"></div>
     </div>
 
     <div class="sobre-text-col">
-      <div class="reveal d1"><span class="sobre-tag">Conheça a clínica</span></div>
-      <div class="reveal d2"><span class="eyebrow">Dra. Vanessa</span></div>
+      <div class="reveal d1"><span class="sobre-tag">A clínica</span></div>
+      <div class="reveal d2"><span class="eyebrow">Nossa missão</span></div>
       <div class="reveal d3">
-        <h2 id="sobre-t" class="title sobre-title">Estética que respeita <em>quem você é</em></h2>
+        <h2 id="sobre-t" class="title sobre-title">Beleza com <em>Identidade</em></h2>
       </div>
       <div class="reveal d4">
+        <div class="mission">
+          <p class="mission-quote">"Realçar, nunca transformar. Cada rosto carrega uma identidade — nosso papel é valorizá-la, não substituí-la."</p>
+        </div>
         <p class="body-text sobre-p">
-          [Aqui entrará o texto de apresentação da Dra. Vanessa e da clínica:
-          formação, filosofia de trabalho e abordagem. Substituir por conteúdo
-          real quando disponível.]
+          O nome da clínica resume sua razão de existir: cuidar da beleza sem
+          apagar o que torna cada pessoa única. Aqui, nenhum procedimento segue
+          um padrão imposto — cada plano é construído a partir de quem você é.
         </p>
         <p class="body-text sobre-p">
-          [Parágrafo secundário sobre o diferencial do atendimento e a
-          experiência oferecida na clínica.]
+          [Espaço para o texto institucional completo: história, valores e
+          a proposta da clínica. Substituir por conteúdo real.]
         </p>
       </div>
-      <div class="sobre-creds reveal d5">
+    </div>
+  </section>
+
+  <!-- ════ SOBRE A DRA. VANESSA ════ -->
+  <section id="equipe" aria-labelledby="equipe-t">
+    <div class="equipe-text-col reveal-l">
+      <span class="eyebrow">Quem conduz</span>
+      <h2 id="equipe-t" class="title equipe-title">Dra. <em>Vanessa</em></h2>
+      <p class="equipe-role">Responsável técnica da clínica</p>
+      <p class="body-text equipe-p">
+        [Aqui entrará a biografia da Dra. Vanessa: formação, tempo de
+        experiência, especializações e abordagem de trabalho. Substituir
+        por conteúdo real quando disponível.]
+      </p>
+      <p class="body-text equipe-p">
+        [Parágrafo sobre a filosofia pessoal dela e o que a diferencia no
+        atendimento.]
+      </p>
+      <div class="equipe-creds">
         <div class="cred">
           <div class="cred-ic">✦</div>
-          <div>
-            <div class="cred-k">Formação</div>
-            <div class="cred-v">[a definir]</div>
-          </div>
+          <div><div class="cred-k">Experiência</div><div class="cred-v">[a definir]</div></div>
         </div>
         <div class="cred">
           <div class="cred-ic">◈</div>
-          <div>
-            <div class="cred-k">Especialização</div>
-            <div class="cred-v">[a definir]</div>
-          </div>
+          <div><div class="cred-k">Especialização</div><div class="cred-v">[a definir]</div></div>
+        </div>
+        <div class="cred">
+          <div class="cred-ic">◇</div>
+          <div><div class="cred-k">Registro</div><div class="cred-v">[a definir]</div></div>
         </div>
       </div>
+    </div>
+    <div class="equipe-visual reveal-r">
+      <div class="equipe-img"><div class="equipe-img-ph">aqui terá uma foto<br />da Dra. Vanessa</div></div>
+      <div class="equipe-frame" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -191,7 +200,7 @@
   </section>
 
   <!-- ════ FILOSOFIA ════ -->
-  <section id="filosofia" class="marble-bg" aria-labelledby="fil-t">
+  <section id="filosofia" aria-labelledby="fil-t">
     <div class="fil-intro">
       <div class="reveal"><span class="eyebrow" style="justify-content:center;">Nossa essência</span></div>
       <div class="reveal d2"><h2 id="fil-t" class="title">Cuidado que vai além <em>do procedimento</em></h2></div>
@@ -201,13 +210,13 @@
         <span class="fil-num">i</span>
         <div class="fil-ic">✦</div>
         <h3 class="fil-t">[Diferencial 01]</h3>
-        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, resultado natural, abordagem personalizada ou outro valor.</p>
+        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, resultado natural ou abordagem personalizada.</p>
       </div>
       <div class="fil-card reveal d2">
         <span class="fil-num">ii</span>
         <div class="fil-ic">◈</div>
         <h3 class="fil-t">[Diferencial 02]</h3>
-        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, tecnologia, segurança ou experiência.</p>
+        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, tecnologia ou segurança.</p>
       </div>
       <div class="fil-card reveal d3">
         <span class="fil-num">iii</span>
@@ -218,38 +227,96 @@
     </div>
   </section>
 
-  <!-- ════ GALERIA ════ -->
+  <!-- ════ GALERIA ANTES/DEPOIS ════ -->
   <section id="galeria" aria-labelledby="gal-t">
     <div class="gal-head">
       <div class="reveal"><span class="eyebrow">Resultados</span></div>
-      <div class="reveal d2"><h2 id="gal-t" class="title">Galeria de <em>transformações</em></h2></div>
+      <div class="reveal d2"><h2 id="gal-t" class="title">Antes & <em>depois</em></h2></div>
     </div>
-    <div class="gal-grid reveal d3">
-      <div class="gal-cell">
-        <div class="gal-cell-inner"><div class="gal-ph">imagem 01</div></div>
-        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
-      </div>
-      <div class="gal-cell">
-        <div class="gal-cell-inner"><div class="gal-ph">imagem 02</div></div>
-        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
-      </div>
-      <div class="gal-cell">
-        <div class="gal-cell-inner"><div class="gal-ph">imagem 03</div></div>
-        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
-      </div>
-      <div class="gal-cell">
-        <div class="gal-cell-inner"><div class="gal-ph">imagem 04</div></div>
-        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
-      </div>
-      <div class="gal-cell">
-        <div class="gal-cell-inner"><div class="gal-ph">imagem 05</div></div>
-        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
-      </div>
+    <div class="gal-grid">
+      <article class="gal-card reveal d1" data-label="[Procedimento 01]" data-antes="antes" data-depois="depois">
+        <div class="gal-ba">
+          <div class="gal-ba-half"><span class="gal-tag l">Antes</span><div class="gal-ph antes">antes</div></div>
+          <div class="gal-ba-half"><span class="gal-tag r">Depois</span><div class="gal-ph depois">depois</div></div>
+          <div class="gal-ba-divider"></div>
+        </div>
+        <div class="gal-card-foot">
+          <span class="gal-card-label">[Procedimento 01]</span>
+          <span class="gal-expand">ampliar ⤢</span>
+        </div>
+      </article>
+      <article class="gal-card reveal d2" data-label="[Procedimento 02]" data-antes="antes" data-depois="depois">
+        <div class="gal-ba">
+          <div class="gal-ba-half"><span class="gal-tag l">Antes</span><div class="gal-ph antes">antes</div></div>
+          <div class="gal-ba-half"><span class="gal-tag r">Depois</span><div class="gal-ph depois">depois</div></div>
+          <div class="gal-ba-divider"></div>
+        </div>
+        <div class="gal-card-foot">
+          <span class="gal-card-label">[Procedimento 02]</span>
+          <span class="gal-expand">ampliar ⤢</span>
+        </div>
+      </article>
+      <article class="gal-card reveal d3" data-label="[Procedimento 03]" data-antes="antes" data-depois="depois">
+        <div class="gal-ba">
+          <div class="gal-ba-half"><span class="gal-tag l">Antes</span><div class="gal-ph antes">antes</div></div>
+          <div class="gal-ba-half"><span class="gal-tag r">Depois</span><div class="gal-ph depois">depois</div></div>
+          <div class="gal-ba-divider"></div>
+        </div>
+        <div class="gal-card-foot">
+          <span class="gal-card-label">[Procedimento 03]</span>
+          <span class="gal-expand">ampliar ⤢</span>
+        </div>
+      </article>
+      <article class="gal-card reveal d1" data-label="[Procedimento 04]" data-antes="antes" data-depois="depois">
+        <div class="gal-ba">
+          <div class="gal-ba-half"><span class="gal-tag l">Antes</span><div class="gal-ph antes">antes</div></div>
+          <div class="gal-ba-half"><span class="gal-tag r">Depois</span><div class="gal-ph depois">depois</div></div>
+          <div class="gal-ba-divider"></div>
+        </div>
+        <div class="gal-card-foot">
+          <span class="gal-card-label">[Procedimento 04]</span>
+          <span class="gal-expand">ampliar ⤢</span>
+        </div>
+      </article>
+      <article class="gal-card reveal d2" data-label="[Procedimento 05]" data-antes="antes" data-depois="depois">
+        <div class="gal-ba">
+          <div class="gal-ba-half"><span class="gal-tag l">Antes</span><div class="gal-ph antes">antes</div></div>
+          <div class="gal-ba-half"><span class="gal-tag r">Depois</span><div class="gal-ph depois">depois</div></div>
+          <div class="gal-ba-divider"></div>
+        </div>
+        <div class="gal-card-foot">
+          <span class="gal-card-label">[Procedimento 05]</span>
+          <span class="gal-expand">ampliar ⤢</span>
+        </div>
+      </article>
+      <article class="gal-card reveal d3" data-label="[Procedimento 06]" data-antes="antes" data-depois="depois">
+        <div class="gal-ba">
+          <div class="gal-ba-half"><span class="gal-tag l">Antes</span><div class="gal-ph antes">antes</div></div>
+          <div class="gal-ba-half"><span class="gal-tag r">Depois</span><div class="gal-ph depois">depois</div></div>
+          <div class="gal-ba-divider"></div>
+        </div>
+        <div class="gal-card-foot">
+          <span class="gal-card-label">[Procedimento 06]</span>
+          <span class="gal-expand">ampliar ⤢</span>
+        </div>
+      </article>
     </div>
   </section>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" role="dialog" aria-label="Visualização ampliada" aria-modal="true">
+    <div class="lb-content">
+      <button class="lb-close" aria-label="Fechar">✕</button>
+      <button class="lb-nav lb-prev" aria-label="Anterior">←</button>
+      <button class="lb-nav lb-next" aria-label="Próximo">→</button>
+      <div class="lb-stage"></div>
+      <p class="lb-caption"></p>
+      <p class="lb-counter"></p>
+    </div>
+  </div>
+
   <!-- ════ DEPOIMENTOS ════ -->
-  <section id="depoimentos" class="marble-bg" aria-labelledby="depo-t">
+  <section id="depoimentos" aria-labelledby="depo-t">
     <div class="depo-head">
       <div class="reveal"><span class="eyebrow">O que dizem</span></div>
       <div class="reveal d2"><h2 id="depo-t" class="title">Experiências <em>reais</em></h2></div>
@@ -294,29 +361,17 @@
       <span class="eyebrow">Onde estamos</span>
       <h2 id="loc-t" class="title loc-title">Venha nos <em>visitar</em></h2>
       <ul class="loc-list" role="list">
-        <li class="loc-item">
-          <div class="loc-ic">📍</div>
-          <div><div class="loc-k">Endereço</div><div class="loc-v">[endereço da clínica]</div></div>
-        </li>
-        <li class="loc-item">
-          <div class="loc-ic">🕐</div>
-          <div><div class="loc-k">Horário</div><div class="loc-v">[horário de atendimento]</div></div>
-        </li>
-        <li class="loc-item">
-          <div class="loc-ic">📞</div>
-          <div><div class="loc-k">Contato</div><div class="loc-v">[telefone / e-mail]</div></div>
-        </li>
-        <li class="loc-item">
-          <div class="loc-ic">🚗</div>
-          <div><div class="loc-k">Estacionamento</div><div class="loc-v">[informação a definir]</div></div>
-        </li>
+        <li class="loc-item"><div class="loc-ic">📍</div><div><div class="loc-k">Endereço</div><div class="loc-v">[endereço da clínica]</div></div></li>
+        <li class="loc-item"><div class="loc-ic">🕐</div><div><div class="loc-k">Horário</div><div class="loc-v">[horário de atendimento]</div></div></li>
+        <li class="loc-item"><div class="loc-ic">📞</div><div><div class="loc-k">Contato</div><div class="loc-v">[telefone / e-mail]</div></div></li>
+        <li class="loc-item"><div class="loc-ic">🚗</div><div><div class="loc-k">Estacionamento</div><div class="loc-v">[informação a definir]</div></div></li>
       </ul>
     </div>
     <div class="loc-map reveal-r"><span>📍</span><span>mapa será inserido aqui</span></div>
   </section>
 
   <!-- ════ CTA ════ -->
-  <section id="agendar" class="marble-bg" aria-labelledby="ag-t">
+  <section id="agendar" aria-labelledby="ag-t">
     <div class="agendar-in">
       <div class="reveal"><span class="eyebrow" style="justify-content:center;">Dê o primeiro passo</span></div>
       <div class="reveal d2"><h2 id="ag-t" class="title agendar-title">Agende sua <em>consulta</em></h2></div>
@@ -326,7 +381,7 @@
           <span>Agendar pelo WhatsApp</span>
           <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="tel:5547990000000" class="btn btn-line"><span>Ligar agora</span></a>
+        <a href="tel:5547990000000" class="btn btn-line">Ligar agora</a>
       </div>
       <p class="agendar-note reveal d5">[horário de atendimento]</p>
     </div>
@@ -337,15 +392,15 @@
     <div class="foot-top">
       <div>
         <div class="foot-name">Beleza com <em>Identidade</em></div>
-        <p class="foot-desc">Clínica de estética comprometida com resultado natural e atendimento humano.</p>
+        <p class="foot-desc">Realçar, nunca transformar. Estética que respeita quem você é.</p>
       </div>
       <div>
         <p class="foot-ct">Navegação</p>
         <ul class="foot-links" role="list">
           <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#equipe">Dra. Vanessa</a></li>
           <li><a href="#procedimentos">Procedimentos</a></li>
-          <li><a href="#galeria">Galeria</a></li>
-          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#galeria">Resultados</a></li>
         </ul>
       </div>
       <div>
