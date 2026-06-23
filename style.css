@@ -26,9 +26,10 @@
   --on-dark-dim:#B6B8B5;  /* secundário sobre escuro */
 
   /* accent */
-  --accent:    #7C878C;   /* prata-azulada, levemente escurecida p/ contraste */
+  --accent:    #7C878C;   /* prata-azulada, para detalhes/linhas */
   --accent-lt: #9AA4A8;   /* sobre fundo escuro */
   --accent-dk: #5F696D;
+  --accent-name: #515B60; /* tom escuro p/ "Identidade" no nome — contraste AA sobre claro */
 
   --line:      rgba(31,33,35,0.12);
   --line-soft: rgba(31,33,35,0.06);
@@ -132,7 +133,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   position: relative; z-index: 1002;
   transition: color 0.45s var(--ease);
 }
-.nav-logo em { font-style: italic; color: var(--accent); transition: color 0.45s var(--ease); }
+.nav-logo em { font-style: italic; color: var(--accent-name); transition: color 0.45s var(--ease); }
 /* ao rolar, logo fica claro sobre o fundo escuro */
 .nav.scrolled .nav-logo { color: var(--on-dark); }
 .nav.scrolled .nav-logo em { color: var(--accent-lt); }
@@ -252,36 +253,67 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1400px; margin: 0 auto; }
 
-.hero-eyebrow-row { margin-bottom: 2rem; opacity: 0; animation: fade-in 1s 0.3s var(--ease) forwards; }
+/* ── WORDMARK: nome como marca estruturada ──
+   "Beleza com" = qualificador pequeno c/ letterspacing largo
+   "Identidade" = palavra-assinatura, protagonista, contraste forte
+   "Clínica de Estética" = descritor inferior                      */
+.hero-mark { margin-bottom: 2.75rem; }
 
-/* nome em destaque: bloco centralizado com linha decorativa */
-.hero-name-block { margin-bottom: 2.5rem; }
-.hl-row { overflow: hidden; display: block; }
-.hl-word {
-  display: inline-block;
-  font-family: var(--f-display); font-weight: 300;
-  font-size: clamp(2.8rem, 9vw, 8.5rem);
-  line-height: 0.98; letter-spacing: -0.025em;
-  color: var(--ink); transform: translateY(110%);
+.hero-mark-top {
+  display: flex; align-items: center; gap: 1rem;
+  font-family: var(--f-body);
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 0.4rem;
+  opacity: 0; animation: fade-in 0.9s 0.4s var(--ease) forwards;
 }
-.hl-word.ident { font-style: italic; color: var(--accent); }
-.hl-row:nth-child(1) .hl-word { animation: rise 1.1s 0.5s var(--ease) forwards; }
-.hl-row:nth-child(2) .hl-word { animation: rise 1.1s 0.64s var(--ease) forwards; }
-.hl-row:nth-child(3) .hl-word { animation: rise 1.1s 0.78s var(--ease) forwards; }
-
-.hero-divider-line {
+.hero-mark-line {
   width: 0; height: 1px; background: var(--accent);
-  margin: 0.5rem 0 2rem;
-  animation: draw 1.2s 1.3s var(--ease) forwards;
+  flex-shrink: 0;
+  animation: draw-sm 0.9s 0.55s var(--ease) forwards;
 }
+
+.hero-mark-name {
+  font-family: var(--f-display);
+  font-weight: 300; font-style: italic;
+  font-size: clamp(3.6rem, 13vw, 9.5rem);
+  line-height: 0.95; letter-spacing: -0.02em;
+  /* contraste corrigido: tom escuro saturado, não o cinza fraco */
+  color: var(--ink);
+  margin: 0 0 0.6rem -0.03em;
+  position: relative;
+  opacity: 0; transform: translateY(24px);
+  animation: rise-fade 1.1s 0.6s var(--ease) forwards;
+}
+/* sublinhado fino sob a palavra-assinatura, desenha ao carregar */
+.hero-mark-name::after {
+  content: ''; position: absolute;
+  left: 0; bottom: 0.12em;
+  width: 0; height: 2px;
+  background: var(--accent);
+  animation: draw-underline 1s 1.4s var(--ease) forwards;
+}
+
+.hero-mark-sub {
+  display: inline-block;
+  font-family: var(--f-body);
+  font-size: 0.66rem; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0; animation: fade-in 0.9s 1.1s var(--ease) forwards;
+}
+
 .hero-slogan {
   font-family: var(--f-display); font-style: italic;
-  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
   color: var(--graphite); font-weight: 300;
-  max-width: 520px; margin-bottom: 2.5rem;
-  opacity: 0; animation: fade-in 1s 1.1s var(--ease) forwards;
+  line-height: 1.5;
+  max-width: 540px; margin-bottom: 2.75rem;
+  opacity: 0; animation: fade-in 1s 1.3s var(--ease) forwards;
 }
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; opacity: 0; animation: fade-in 1s 1.3s var(--ease) forwards; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; opacity: 0; animation: fade-in 1s 1.5s var(--ease) forwards; }
 
 .hero-hint { position: absolute; bottom: 2.5rem; left: 5%; display: flex; align-items: center; gap: 0.7rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--silver); opacity: 0; animation: fade-in 1s 1.7s var(--ease) forwards; }
 .scroll-bar { width: 50px; height: 1px; background: var(--line); position: relative; overflow: hidden; }
@@ -463,8 +495,11 @@ footer { background: #16181A; padding: 4.5rem 5% 2.5rem; }
 
 /* KEYFRAMES */
 @keyframes rise { from { transform: translateY(110%); } to { transform: translateY(0); } }
+@keyframes rise-fade { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes draw { from { width: 0; } to { width: 120px; } }
+@keyframes draw-sm { from { width: 0; } to { width: 48px; } }
+@keyframes draw-underline { from { width: 0; } to { width: clamp(140px, 38vw, 360px); } }
 @keyframes scroll-run { 0% { left: -40%; } 100% { left: 100%; } }
 
 /* RESPONSIVO */
@@ -494,5 +529,6 @@ footer { background: #16181A; padding: 4.5rem 5% 2.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .hl-word { transform: none !important; }
+  .hero-mark-name { transform: none !important; opacity: 1 !important; }
+  .hero-mark-name::after, .hero-mark-line { width: auto !important; }
 }
