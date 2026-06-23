@@ -2,665 +2,382 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Beleza com Identidade — Clínica de Estética com a Dra. Vanessa." />
+  <title>Beleza com Identidade — Dra. Vanessa</title>
 
-  <!-- ============================================================
-       SEO / METADADOS  (edite título e descrição se desejar)
-       ============================================================ -->
-  <title>Laura &amp; José · 15 de novembro de 2026 · Brusque/SC</title>
-  <meta name="description" content="Convite do casamento de Laura e José. 15 de novembro de 2026, às 16h, no Arte & Gula, em Brusque/SC. Confirme sua presença com carinho." />
-  <meta name="theme-color" content="#5b6042" />
-  <meta name="author" content="Laura & José" />
-
-  <!-- Open Graph (compartilhamento em redes/WhatsApp) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Casamento de Laura & José" />
-  <meta property="og:description" content="15 de novembro de 2026, às 16h, no Arte & Gula — Brusque/SC." />
-  <!-- TROCAR: imagem de preview ao compartilhar o link -->
-  <meta property="og:image" content="assets/preview-compartilhamento.jpg" />
-  <meta property="og:locale" content="pt_BR" />
-
-  <!-- ============================================================
-       FONTES (Google Fonts)
-       Tangerine = nomes dos noivos | Cormorant = títulos | Montserrat = textos
-       ============================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- Link de acessibilidade (pular para o conteúdo) -->
-  <a class="skip-link" href="#inicio">Pular para o conteúdo</a>
 
-  <!-- ============================================================
-       TELA DE ABERTURA (ENVELOPE CINEMATOGRÁFICO)
-       Cena com poeira dourada + luz; ao clicar no lacre o envelope
-       abre e revela o site. Lógica em script.js > initAbertura().
-       TROCAR BRASÃO: assets/brasao.png (quadrada, fundo transparente).
-       Sem a imagem, aparece o texto "L&J".
-       ============================================================ -->
-  <div class="abertura" data-abertura>
-    <canvas class="abertura__particulas" data-particulas aria-hidden="true"></canvas>
-    <div class="abertura__luz" aria-hidden="true"></div>
-    <div class="abertura__brilho-final" data-brilho aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
 
-    <div class="abertura__cena" data-cena>
-      <div class="envelope" data-envelope>
-        <div class="envelope__sombra" aria-hidden="true"></div>
+  <!-- ════ NAV ════ -->
+  <nav class="nav" aria-label="Navegação principal">
+    <a href="#hero" class="nav-logo">Beleza com <em>Identidade</em></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#procedimentos">Procedimentos</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#localizacao">Localização</a></li>
+    </ul>
+    <a href="#agendar" class="nav-cta">Agendar</a>
+    <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
 
-        <div class="envelope__corpo">
-          <!-- Forro decorativo visível ao abrir a aba -->
-          <span class="envelope__forro" aria-hidden="true"></span>
+  <div class="drawer" role="dialog" aria-label="Menu">
+    <a href="#sobre">Sobre</a>
+    <a href="#procedimentos">Procedimentos</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#localizacao">Localização</a>
+    <a href="#agendar">Agendar</a>
+  </div>
 
-          <!-- Carta que flutua para fora ao abrir -->
-          <div class="envelope__carta" data-carta aria-hidden="true">
-            <span class="carta__topo">Com a bênção de Deus</span>
-            <span class="carta__nomes">Laura &amp; José</span>
-            <span class="carta__sub">têm a alegria de convidar você</span>
-            <span class="carta__data">15 · 11 · 2026</span>
-            <span class="carta__sprig" aria-hidden="true"></span>
-          </div>
-
-          <!-- Aba superior com forro interno (face dupla 3D) -->
-          <div class="envelope__aba" data-aba aria-hidden="true">
-            <span class="envelope__aba-fora"></span>
-            <span class="envelope__aba-dentro"></span>
-          </div>
-
-          <!-- Frente do envelope (cobre a carta quando fechado) -->
-          <span class="envelope__frente" aria-hidden="true"></span>
-
-          <!-- Lacre / selo de cera (clicável) -->
-          <button class="lacre" type="button" data-abertura-lacre aria-label="Abrir o convite">
-            <span class="lacre__cera" aria-hidden="true"><span class="lacre__gloss"></span></span>
-            <img class="lacre__brasao" data-brasao src="assets/brasao.png" alt="" aria-hidden="true" />
-            <span class="lacre__texto">L&amp;J</span>
-          </button>
-        </div>
+  <!-- ════ HERO ════ -->
+  <section id="hero" class="marble-bg" aria-label="Apresentação">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-top">
+        <span class="hero-mark">Clínica de Estética · Dra. Vanessa</span>
+        <p class="hero-intro">Um espaço dedicado a realçar a beleza que já existe em você — com técnica e cuidado.</p>
       </div>
 
-      <p class="abertura__hint" data-abertura-hint>toque no selo para abrir</p>
+      <h1 class="hero-headline" aria-label="Beleza com Identidade">
+        <span class="hl-row"><span class="hl-word">Beleza</span></span>
+        <span class="hl-row"><span class="hl-word">com</span></span>
+        <span class="hl-row"><span class="hl-word ident">Identidade</span></span>
+      </h1>
+
+      <div class="hero-bottom">
+        <div class="hero-actions">
+          <a href="https://wa.me/5547990000000?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta." class="btn btn-fill" target="_blank" rel="noopener noreferrer">
+            <span>Agendar pelo WhatsApp</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#procedimentos" class="btn btn-line"><span>Ver procedimentos</span></a>
+        </div>
+        <div class="hero-hint">
+          <span>role para descobrir</span>
+          <span class="scroll-bar"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ FAIXA DE PROCEDIMENTOS (estática) ════ -->
+  <div class="proc-strip">
+    <div class="proc-strip-inner">
+      <div class="strip-item">Procedimento 01</div>
+      <div class="strip-item">Procedimento 02</div>
+      <div class="strip-item">Procedimento 03</div>
+      <div class="strip-item">Procedimento 04</div>
     </div>
   </div>
 
-  <!-- ============================================================
-       CABEÇALHO  (header fixo + menu)
-       ============================================================ -->
-  <header class="cabecalho" id="cabecalho" data-cabecalho>
-    <div class="cabecalho__interno container">
-      <a class="cabecalho__logo" href="#inicio" aria-label="Laura e José — ir para o início">Laura &amp; José</a>
-
-      <button class="cabecalho__hamburguer" type="button" aria-label="Abrir menu de navegação"
-              aria-expanded="false" aria-controls="menu-principal" data-menu-toggle>
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="cabecalho__nav" aria-label="Navegação principal">
-        <ul class="menu" id="menu-principal" data-menu>
-          <li><a class="menu__link" href="#inicio">Início</a></li>
-          <li><a class="menu__link" href="#historia">História</a></li>
-          <li><a class="menu__link" href="#grande-dia">O Grande Dia</a></li>
-          <li><a class="menu__link" href="#cronograma">Cronograma</a></li>
-          <li><a class="menu__link" href="#familia">Pais &amp; Avós</a></li>
-          <li><a class="menu__link" href="#padrinhos">Padrinhos</a></li>
-          <li><a class="menu__link" href="#presentes">Presentes</a></li>
-          <li><a class="menu__link" href="#confirmacao">Confirmação</a></li>
-          <li><a class="menu__link" href="#galeria">Galeria</a></li>
-        </ul>
-      </nav>
+  <!-- ════ SOBRE ════ -->
+  <section id="sobre" aria-labelledby="sobre-t">
+    <div class="sobre-visual reveal-l">
+      <div class="sobre-img"><div class="sobre-img-ph">aqui terá uma foto da<br />Dra. Vanessa ou da clínica</div></div>
+      <div class="sobre-badge">
+        <div class="sobre-badge-num" data-count="0">00</div>
+        <div class="sobre-badge-label">anos de experiência</div>
+      </div>
+      <div class="sobre-frame" aria-hidden="true"></div>
     </div>
-  </header>
 
-  <!-- Camada escura ao abrir o menu no mobile -->
-  <div class="overlay-menu" data-menu-overlay hidden></div>
-
-  <main>
-    <!-- ============================================================
-         1) HERO / INÍCIO
-         ============================================================ -->
-    <section class="hero" id="inicio">
-      <!-- TROCAR VÍDEO DE FUNDO: substitua assets/video-fundo.mp4.
-           Se o vídeo falhar, a imagem de fallback (poster) aparece. -->
-      <video class="hero__video" autoplay muted loop playsinline
-             poster="assets/hero-fallback.jpg" aria-hidden="true">
-        <source src="assets/video-fundo.mp4" type="video/mp4" />
-      </video>
-
-      <div class="hero__overlay" aria-hidden="true"></div>
-
-      <div class="hero__conteudo container" data-hero>
-        <p class="hero__intro hero-item">Com a bênção de Deus, convidamos você</p>
-        <h1 class="hero__nomes hero-item">Laura &amp; José</h1>
-        <p class="hero__data hero-item">
-          15 de novembro de 2026 &nbsp;•&nbsp; Domingo, às 16h00
-        </p>
-        <p class="hero__local hero-item">
-          Arte &amp; Gula &nbsp;•&nbsp; Brusque, Santa Catarina
-        </p>
-
-        <!-- CONTAGEM REGRESSIVA — atualizada via script.js (CONFIG.dataEvento) -->
-        <div class="contagem hero-item" data-contagem
-             aria-label="Contagem regressiva para o casamento">
-          <div class="contagem__bloco"><span class="contagem__num" data-cont-dias>00</span><span class="contagem__rotulo">dias</span></div>
-          <span class="contagem__sep" aria-hidden="true"></span>
-          <div class="contagem__bloco"><span class="contagem__num" data-cont-horas>00</span><span class="contagem__rotulo">horas</span></div>
-          <span class="contagem__sep" aria-hidden="true"></span>
-          <div class="contagem__bloco"><span class="contagem__num" data-cont-min>00</span><span class="contagem__rotulo">min</span></div>
-          <span class="contagem__sep" aria-hidden="true"></span>
-          <div class="contagem__bloco"><span class="contagem__num" data-cont-seg>00</span><span class="contagem__rotulo">seg</span></div>
-        </div>
-
-        <div class="hero__acoes hero-item">
-          <a class="botao botao--ouro" href="#grande-dia">Detalhes do casamento</a>
-          <a class="botao botao--contorno" href="#confirmacao">Confirmar presença</a>
-          <!-- Copia o endereço completo (texto definido em script.js > CONFIG.endereco) -->
-          <button class="botao botao--fantasma" type="button" data-copiar-endereco>Copiar endereço</button>
-        </div>
+    <div class="sobre-text-col">
+      <div class="reveal d1"><span class="sobre-tag">Conheça a clínica</span></div>
+      <div class="reveal d2"><span class="eyebrow">Dra. Vanessa</span></div>
+      <div class="reveal d3">
+        <h2 id="sobre-t" class="title sobre-title">Estética que respeita <em>quem você é</em></h2>
       </div>
-
-      <a class="hero__rolar" href="#historia" aria-label="Rolar para a próxima seção">
-        <span class="hero__rolar-traco" aria-hidden="true"></span>
-      </a>
-    </section>
-
-    <!-- ============================================================
-         2) NOSSA HISTÓRIA
-         ============================================================ -->
-    <section class="secao historia" id="historia">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Nossa História</h2>
-          <p class="secao__subtitulo">
-            Um amor que nasceu na casa de Deus, cresceu em amizade e hoje se torna aliança.
-          </p>
+      <div class="reveal d4">
+        <p class="body-text sobre-p">
+          [Aqui entrará o texto de apresentação da Dra. Vanessa e da clínica:
+          formação, filosofia de trabalho e abordagem. Substituir por conteúdo
+          real quando disponível.]
+        </p>
+        <p class="body-text sobre-p">
+          [Parágrafo secundário sobre o diferencial do atendimento e a
+          experiência oferecida na clínica.]
+        </p>
+      </div>
+      <div class="sobre-creds reveal d5">
+        <div class="cred">
+          <div class="cred-ic">✦</div>
+          <div>
+            <div class="cred-k">Formação</div>
+            <div class="cred-v">[a definir]</div>
+          </div>
         </div>
-
-        <div class="historia__grade">
-          <!-- TROCAR FOTO DA HISTÓRIA: assets/historia.jpg -->
-          <figure class="moldura moldura--retrato animar" data-animar>
-            <img class="moldura__img" data-src="assets/historia.jpg" alt="Laura e José" loading="lazy" />
-            <span class="moldura__placeholder" aria-hidden="true">Foto do casal</span>
-          </figure>
-
-          <div class="historia__texto animar" data-animar data-animar-atraso="1">
-            <p>A nossa história começou dentro da igreja, em meio a cultos, louvores, abraços sinceros e aquela presença que, aos poucos, foi ficando indispensável.</p>
-            <p>Primeiro veio a amizade, o cuidado um com o outro e a alegria de compartilhar a vida em Cristo.</p>
-            <p>No acampamento de jovens de 2025, Deus confirmou aquilo que o coração já desconfiava: era amor. Entre orações, conversas e muitos sorrisos, entendemos que Ele estava escrevendo algo especial.</p>
-            <p>Em <strong>31 de maio de 2025</strong>, oficializamos o namoro e começamos a sonhar juntos.</p>
-            <p>Hoje, com muita gratidão, damos o próximo passo: construir um lar. Queremos celebrar com você o início dessa nova fase, pedindo que Deus continue sendo o centro de tudo o que somos e viveremos.</p>
+        <div class="cred">
+          <div class="cred-ic">◈</div>
+          <div>
+            <div class="cred-k">Especialização</div>
+            <div class="cred-v">[a definir]</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============================================================
-         3) O GRANDE DIA
-         ============================================================ -->
-    <section class="secao secao--oliva grande-dia" id="grande-dia">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento secao__ornamento--claro" aria-hidden="true"></span>
-          <h2 class="secao__titulo">O Grande Dia</h2>
-          <p class="secao__subtitulo">
-            Um fim de tarde preparado com carinho para celebrar, agradecer e viver esse sonho com você.
-          </p>
-        </div>
-
-        <div class="cartoes">
-          <article class="cartao animar" data-animar>
-            <h3 class="cartao__titulo">Data &amp; Horário</h3>
-            <p class="cartao__texto">15 de novembro de 2026<br />Domingo, às 16h00</p>
-          </article>
-
-          <article class="cartao animar" data-animar data-animar-atraso="1">
-            <h3 class="cartao__titulo">Local</h3>
-            <p class="cartao__texto">Arte &amp; Gula<br />Brusque • Santa Catarina</p>
-          </article>
-
-          <article class="cartao animar" data-animar data-animar-atraso="2">
-            <h3 class="cartao__titulo">Traje</h3>
-            <p class="cartao__texto">Traje social</p>
-          </article>
-
-          <article class="cartao animar" data-animar data-animar-atraso="3">
-            <h3 class="cartao__titulo">Endereço</h3>
-            <p class="cartao__texto">R. Dorval Luz, 183<br />Brusque - SC<br />CEP 88352-402</p>
-          </article>
-        </div>
-
-        <div class="grande-dia__acoes animar" data-animar>
-          <!-- TROCAR LINKS DE MAPA: href do Google Maps e do Waze -->
-          <a class="botao botao--ouro" href="https://maps.app.goo.gl/JjQtjvdPB5AaFrr76" target="_blank" rel="noopener">Abrir no Google Maps</a>
-          <a class="botao botao--contorno-claro" href="https://www.waze.com/en/live-map/directions/arte-e-gula-r.-dorval-luz-183-brusque?place=w.203884025.2038971326.13561764" target="_blank" rel="noopener">Abrir no Waze</a>
-          <button class="botao botao--fantasma-claro" type="button" data-copiar-endereco>Copiar endereço</button>
-        </div>
+  <!-- ════ PROCEDIMENTOS ════ -->
+  <section id="procedimentos" aria-labelledby="proc-t">
+    <div class="proc-head">
+      <div>
+        <div class="reveal"><span class="eyebrow">O que oferecemos</span></div>
+        <div class="reveal d2"><h2 id="proc-t" class="title proc-title">Procedimentos</h2></div>
       </div>
-    </section>
+      <div class="reveal d3"><a href="#agendar" class="btn btn-text">Agendar consulta →</a></div>
+    </div>
 
-    <!-- ============================================================
-         4) SUGESTÕES DE TRAJES  (2 carrosséis)
-         ============================================================ -->
-    <section class="secao trajes" id="trajes">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Sugestões de Trajes</h2>
-          <p class="secao__subtitulo">Traje social — clássico, elegante e com a sua personalidade.</p>
-        </div>
+    <div class="proc-grid">
+      <article class="proc-card reveal d1">
+        <div class="proc-top"><span class="proc-num">01</span><div class="proc-ic">✦</div></div>
+        <h3 class="proc-name">Procedimento 01</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d2">
+        <div class="proc-top"><span class="proc-num">02</span><div class="proc-ic">◈</div></div>
+        <h3 class="proc-name">Procedimento 02</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d3">
+        <div class="proc-top"><span class="proc-num">03</span><div class="proc-ic">◇</div></div>
+        <h3 class="proc-name">Procedimento 03</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d4">
+        <div class="proc-top"><span class="proc-num">04</span><div class="proc-ic">✧</div></div>
+        <h3 class="proc-name">Procedimento 04</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d1">
+        <div class="proc-top"><span class="proc-num">05</span><div class="proc-ic">◉</div></div>
+        <h3 class="proc-name">Procedimento 05</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d2">
+        <div class="proc-top"><span class="proc-num">06</span><div class="proc-ic">⬡</div></div>
+        <h3 class="proc-name">Procedimento 06</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d3">
+        <div class="proc-top"><span class="proc-num">07</span><div class="proc-ic">◎</div></div>
+        <h3 class="proc-name">Procedimento 07</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+      <article class="proc-card reveal d4">
+        <div class="proc-top"><span class="proc-num">08</span><div class="proc-ic">✦</div></div>
+        <h3 class="proc-name">Procedimento 08</h3>
+        <p class="proc-desc">Aqui terá a descrição de um procedimento realizado na clínica.</p>
+        <div class="proc-dur">duração</div>
+      </article>
+    </div>
+  </section>
 
-        <div class="trajes__grade">
-          <!-- CARD 1 — TRAJE MASCULINO -->
-          <article class="cartao-traje animar" data-animar>
-            <!-- TROCAR FOTOS: assets/trajes/masc-1.jpg, masc-2.jpg, masc-3.jpg ...
-                 Para adicionar mais fotos, basta duplicar um <figure> dentro de .carrossel__trilho -->
-            <div class="carrossel" data-carrossel aria-roledescription="carrossel" aria-label="Sugestões de traje social masculino">
-              <div class="carrossel__janela">
-                <div class="carrossel__trilho" data-carrossel-trilho>
-                  <figure class="carrossel__slide">
-                    <img class="moldura__img" data-src="assets/trajes/masc-1.jpg" alt="Sugestão de traje social masculino" loading="lazy" />
-                    <span class="moldura__placeholder" aria-hidden="true">Traje masculino</span>
-                  </figure>
-                  <figure class="carrossel__slide">
-                    <img class="moldura__img" data-src="assets/trajes/masc-2.jpg" alt="Sugestão de traje social masculino" loading="lazy" />
-                    <span class="moldura__placeholder" aria-hidden="true">Traje masculino</span>
-                  </figure>
-                  <figure class="carrossel__slide">
-                    <img class="moldura__img" data-src="assets/trajes/masc-3.jpg" alt="Sugestão de traje social masculino" loading="lazy" />
-                    <span class="moldura__placeholder" aria-hidden="true">Traje masculino</span>
-                  </figure>
-                </div>
-              </div>
-              <button class="carrossel__seta carrossel__seta--ant" type="button" aria-label="Foto anterior" data-carrossel-ant>‹</button>
-              <button class="carrossel__seta carrossel__seta--prox" type="button" aria-label="Próxima foto" data-carrossel-prox>›</button>
-              <div class="carrossel__dots" data-carrossel-dots aria-hidden="true"></div>
-            </div>
-
-            <div class="cartao-traje__texto">
-              <h3 class="cartao-traje__titulo">Traje social masculino</h3>
-              <p>Ternos, camisas sociais, calças alinhadas e sapatos bem cuidados. Clássico, elegante e com a sua personalidade.</p>
-            </div>
-          </article>
-
-          <!-- CARD 2 — TRAJE FEMININO -->
-          <article class="cartao-traje animar" data-animar data-animar-atraso="1">
-            <!-- TROCAR FOTOS: assets/trajes/fem-1.jpg, fem-2.jpg, fem-3.jpg ... -->
-            <div class="carrossel" data-carrossel aria-roledescription="carrossel" aria-label="Sugestões de traje social feminino">
-              <div class="carrossel__janela">
-                <div class="carrossel__trilho" data-carrossel-trilho>
-                  <figure class="carrossel__slide">
-                    <img class="moldura__img" data-src="assets/trajes/fem-1.jpg" alt="Sugestão de traje social feminino" loading="lazy" />
-                    <span class="moldura__placeholder" aria-hidden="true">Traje feminino</span>
-                  </figure>
-                  <figure class="carrossel__slide">
-                    <img class="moldura__img" data-src="assets/trajes/fem-2.jpg" alt="Sugestão de traje social feminino" loading="lazy" />
-                    <span class="moldura__placeholder" aria-hidden="true">Traje feminino</span>
-                  </figure>
-                  <figure class="carrossel__slide">
-                    <img class="moldura__img" data-src="assets/trajes/fem-3.jpg" alt="Sugestão de traje social feminino" loading="lazy" />
-                    <span class="moldura__placeholder" aria-hidden="true">Traje feminino</span>
-                  </figure>
-                </div>
-              </div>
-              <button class="carrossel__seta carrossel__seta--ant" type="button" aria-label="Foto anterior" data-carrossel-ant>‹</button>
-              <button class="carrossel__seta carrossel__seta--prox" type="button" aria-label="Próxima foto" data-carrossel-prox>›</button>
-              <div class="carrossel__dots" data-carrossel-dots aria-hidden="true"></div>
-            </div>
-
-            <div class="cartao-traje__texto">
-              <h3 class="cartao-traje__titulo">Traje social feminino</h3>
-              <p>Vestidos, conjuntos sociais ou macacões elegantes. Movimento, delicadeza e beleza em cada detalhe.</p>
-            </div>
-          </article>
-        </div>
-
-        <!-- Observação delicada sobre cores reservadas (paleta verde oliva) -->
-        <p class="trajes__nota animar" data-animar>
-          Com carinho, pedimos reservar o <strong>branco</strong> e o <strong>champagne</strong> à noiva.
-        </p>
+  <!-- ════ FILOSOFIA ════ -->
+  <section id="filosofia" class="marble-bg" aria-labelledby="fil-t">
+    <div class="fil-intro">
+      <div class="reveal"><span class="eyebrow" style="justify-content:center;">Nossa essência</span></div>
+      <div class="reveal d2"><h2 id="fil-t" class="title">Cuidado que vai além <em>do procedimento</em></h2></div>
+    </div>
+    <div class="fil-grid">
+      <div class="fil-card reveal d1">
+        <span class="fil-num">i</span>
+        <div class="fil-ic">✦</div>
+        <h3 class="fil-t">[Diferencial 01]</h3>
+        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, resultado natural, abordagem personalizada ou outro valor.</p>
       </div>
-    </section>
-
-    <!-- ============================================================
-         5) CRONOGRAMA
-         ============================================================ -->
-    <section class="secao secao--areia cronograma" id="cronograma">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Cronograma</h2>
-          <p class="secao__subtitulo">
-            Pensamos em cada horário com carinho para que tudo aconteça sem pressa, com leveza e muitos sorrisos.
-          </p>
-        </div>
-
-        <ol class="timeline">
-          <li class="timeline__item animar" data-animar>
-            <span class="timeline__hora">16h00</span>
-            <div class="timeline__conteudo">
-              <h3 class="timeline__titulo">Início da cerimônia</h3>
-              <p>O momento mais esperado: diremos “sim” diante de Deus, da família e dos amigos.</p>
-            </div>
-          </li>
-          <li class="timeline__item animar" data-animar>
-            <span class="timeline__hora">17h30</span>
-            <div class="timeline__conteudo">
-              <h3 class="timeline__titulo">Encerramento da cerimônia</h3>
-              <p>Saída dos noivos, abraços apertados, fotos e muita emoção.</p>
-            </div>
-          </li>
-          <li class="timeline__item animar" data-animar>
-            <span class="timeline__hora">17h30–18h30</span>
-            <div class="timeline__conteudo">
-              <h3 class="timeline__titulo">Recepção &amp; Fotos</h3>
-              <p>Tempo para fotos com os noivos, conversas, aperitivos e aquele clima gostoso de festa em família.</p>
-            </div>
-          </li>
-          <li class="timeline__item animar" data-animar>
-            <span class="timeline__hora">18h30</span>
-            <div class="timeline__conteudo">
-              <h3 class="timeline__titulo">Jantar</h3>
-              <p>Vamos celebrar à mesa, agradecer e desfrutar juntos desse momento tão especial.</p>
-            </div>
-          </li>
-          <li class="timeline__item animar" data-animar>
-            <span class="timeline__hora">21h–22h</span>
-            <div class="timeline__conteudo">
-              <h3 class="timeline__titulo">Encerramento</h3>
-              <p>Despedidas, gratidão e o início de um novo capítulo: a nossa vida como família.</p>
-            </div>
-          </li>
-        </ol>
+      <div class="fil-card reveal d2">
+        <span class="fil-num">ii</span>
+        <div class="fil-ic">◈</div>
+        <h3 class="fil-t">[Diferencial 02]</h3>
+        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, tecnologia, segurança ou experiência.</p>
       </div>
-    </section>
-
-    <!-- ============================================================
-         6) PAIS & AVÓS
-         As fotos ficam em <figure class="moldura"> e aceitam imagens
-         quadradas ou verticais sem deformar (object-fit: cover).
-         TROCAR FOTOS: assets/familia/<arquivo>.jpg
-         ============================================================ -->
-    <section class="secao familia" id="familia">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Pais &amp; Avós</h2>
-          <p class="secao__subtitulo">
-            Quem nos deu a vida, nos ensinou a amar e abençoa cada passo desta nova fase.
-          </p>
-        </div>
-
-        <!-- FAMÍLIA DO NOIVO -->
-        <h3 class="familia__grupo animar" data-animar>Família do noivo</h3>
-        <div class="pessoas">
-          <!-- TROCAR nome / parentesco / foto de cada pessoa abaixo -->
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/carla.jpg" alt="Carla Denise Bruns da Silva Santos" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Carla Denise Bruns da Silva Santos<span class="pessoa__papel">Mãe do noivo</span></figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/mario.jpg" alt="Mario da Silva Santos" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Mario da Silva Santos<span class="pessoa__papel">Pai do noivo</span></figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/rodolfo.jpg" alt="Rodolfo Bruns" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Rodolfo Bruns<span class="pessoa__papel">Opa do noivo</span></figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/carmem.jpg" alt="Carmem Bruns" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Carmem Bruns<span class="pessoa__papel">Oma do noivo</span></figcaption>
-          </figure>
-        </div>
-
-        <!-- FAMÍLIA DA NOIVA -->
-        <h3 class="familia__grupo animar" data-animar>Família da noiva</h3>
-        <div class="pessoas">
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/monica.jpg" alt="Mônica Barbosa da Silva" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Mônica Barbosa da Silva<span class="pessoa__papel">Mãe da noiva</span></figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/lindon.jpg" alt="Lindon Jhonson Silva Matos" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Lindon Jhonson Silva Matos<span class="pessoa__papel">Pai da noiva</span></figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/benomir.jpg" alt="Benomir Henrique Silva Matos" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Benomir Henrique Silva Matos<span class="pessoa__papel">Vô da noiva</span></figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto">
-              <img class="moldura__img" data-src="assets/familia/maria.jpg" alt="Maria de Jesus Silva Matos" loading="lazy" />
-              <span class="moldura__placeholder" aria-hidden="true">Foto</span>
-            </span>
-            <figcaption class="pessoa__nome">Maria de Jesus Silva Matos<span class="pessoa__papel">Vó da noiva</span></figcaption>
-          </figure>
-        </div>
-
-        <p class="familia__fecho animar" data-animar>
-          Cada um deles tem um lugar único na nossa história. É uma alegria imensa tê-los conosco neste dia tão especial.
-        </p>
+      <div class="fil-card reveal d3">
+        <span class="fil-num">iii</span>
+        <div class="fil-ic">◇</div>
+        <h3 class="fil-t">[Diferencial 03]</h3>
+        <p class="fil-d">Aqui entrará um diferencial da clínica — por exemplo, atendimento humano e acompanhamento.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============================================================
-         7) PADRINHOS & MADRINHAS
-         TROCAR FOTOS: assets/padrinhos/<arquivo>.jpg
-         ============================================================ -->
-    <section class="secao secao--oliva padrinhos" id="padrinhos">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento secao__ornamento--claro" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Padrinhos &amp; Madrinhas</h2>
-          <p class="secao__subtitulo">
-            Amigos e familiares que caminharam conosco, oraram por nós e estarão pertinho do altar nesse grande momento.
-          </p>
-        </div>
-
-        <h3 class="familia__grupo familia__grupo--claro animar" data-animar>Padrinhos</h3>
-        <div class="pessoas pessoas--claro">
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/caua.jpg" alt="Cauã Nascimento de Paula Machado" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Cauã Nascimento de Paula Machado</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/joao.jpg" alt="João Pedro Ossucci Martins" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">João Pedro Ossucci Martins</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/agenor.jpg" alt="Agenor Tavres de Araújo" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Agenor Tavres de Araújo</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/daniel.jpg" alt="Daniel Vitor Picolotto" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Daniel Vitor Picolotto</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/carlos.jpg" alt="Carlos Eduardo Marinho" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Carlos Eduardo Marinho</figcaption>
-          </figure>
-        </div>
-
-        <h3 class="familia__grupo familia__grupo--claro animar" data-animar>Madrinhas</h3>
-        <div class="pessoas pessoas--claro">
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/isadora.jpg" alt="Isadora" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Isadora</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/franciele.jpg" alt="Franciele" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Franciele</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/rebeca.jpg" alt="Rebeca" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Rebeca</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/phamela.jpg" alt="Phamela" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Phamela</figcaption>
-          </figure>
-          <figure class="pessoa animar" data-animar>
-            <span class="pessoa__foto"><img class="moldura__img" data-src="assets/padrinhos/leticia.jpg" alt="Leticia" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto</span></span>
-            <figcaption class="pessoa__nome">Leticia</figcaption>
-          </figure>
-        </div>
-
-        <p class="familia__fecho familia__fecho--claro animar" data-animar>
-          Pessoas que escolhemos para caminhar bem pertinho de nós nesse dia.
-        </p>
+  <!-- ════ GALERIA ════ -->
+  <section id="galeria" aria-labelledby="gal-t">
+    <div class="gal-head">
+      <div class="reveal"><span class="eyebrow">Resultados</span></div>
+      <div class="reveal d2"><h2 id="gal-t" class="title">Galeria de <em>transformações</em></h2></div>
+    </div>
+    <div class="gal-grid reveal d3">
+      <div class="gal-cell">
+        <div class="gal-cell-inner"><div class="gal-ph">imagem 01</div></div>
+        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
       </div>
-    </section>
-
-    <!-- ============================================================
-         8) LISTA DE PRESENTES
-         ============================================================ -->
-    <section class="secao presentes" id="presentes">
-      <div class="container container--estreito">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Lista de Presentes</h2>
-          <p class="secao__subtitulo">
-            A sua presença é o maior presente. Mas, se desejar nos presentear, preparamos uma lista com carinho.
-          </p>
-        </div>
-
-        <div class="presentes__texto animar" data-animar>
-          <p>Estamos construindo o nosso lar com muito amor e simplicidade. Se você quiser nos abençoar também de forma material, criamos uma lista de presentes que vai nos ajudar nessa nova etapa.</p>
-          <p>Fique à vontade para escolher o que quiser. O que realmente importa para nós é saber que você faz parte dessa história.</p>
-        </div>
-
-        <div class="presentes__acao animar" data-animar>
-          <!-- TROCAR LINK DA LISTA DE PRESENTES: substitua o "#" pelo link real -->
-          <a class="botao botao--ouro" href="#" target="_blank" rel="noopener" data-lista-presentes>Acessar lista de presentes</a>
-        </div>
+      <div class="gal-cell">
+        <div class="gal-cell-inner"><div class="gal-ph">imagem 02</div></div>
+        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
       </div>
-    </section>
-
-    <!-- ============================================================
-         9) CONFIRMAÇÃO DE PRESENÇA
-         O envio abre o WhatsApp (número e mensagem em script.js > CONFIG).
-         ============================================================ -->
-    <section class="secao secao--areia confirmacao" id="confirmacao">
-      <div class="container container--estreito">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Confirmação de Presença</h2>
-          <p class="secao__subtitulo">
-            Sua presença é muito especial para nós. Confirme abaixo e a mensagem será enviada diretamente pelo WhatsApp.
-          </p>
-        </div>
-
-        <form class="formulario animar" data-animar data-form-confirmacao novalidate>
-          <div class="campo">
-            <label class="campo__rotulo" for="nome">Nome completo</label>
-            <input class="campo__entrada" id="nome" name="nome" type="text" autocomplete="name" required />
-          </div>
-
-          <div class="campo">
-            <label class="campo__rotulo" for="acompanhantes">Quantidade de acompanhantes</label>
-            <input class="campo__entrada" id="acompanhantes" name="acompanhantes" type="number" min="0" step="1" inputmode="numeric" value="0" />
-          </div>
-
-          <div class="campo">
-            <label class="campo__rotulo" for="observacoes">Observações <span class="campo__opcional">(opcional)</span></label>
-            <textarea class="campo__entrada" id="observacoes" name="observacoes" rows="3"></textarea>
-          </div>
-
-          <button class="botao botao--ouro botao--bloco" type="submit">Confirmar presença pelo WhatsApp</button>
-        </form>
-
-        <!-- Aviso importante (card delicado) -->
-        <aside class="aviso animar" data-animar aria-label="Observação importante sobre a confirmação">
-          <span class="aviso__selo">Importante</span>
-          <p>Para que possamos organizar tudo com carinho e dentro da capacidade planejada para o evento, pedimos que a confirmação seja realizada apenas pelas pessoas contempladas no convite.</p>
-          <p>Nosso casamento será uma celebração intimista e familiar, por isso não será possível incluir amigos, conhecidos ou acompanhantes não previstos inicialmente pelos anfitriões.</p>
-          <p>Caso exista a necessidade de levar acompanhante(s), essa informação poderá ser informada no momento da confirmação. Cada solicitação será analisada individualmente pelos noivos, de acordo com a organização do evento e a disponibilidade de lugares.</p>
-          <p>Após o envio da confirmação, os anfitriões terão até <strong>48 horas</strong> para validar e confirmar a participação informada.</p>
-          <p>Agradecemos pela compreensão e pelo carinho. Estamos preparando cada detalhe com muito amor e queremos viver esse momento especial ao lado das pessoas que fazem parte da nossa história.</p>
-        </aside>
+      <div class="gal-cell">
+        <div class="gal-cell-inner"><div class="gal-ph">imagem 03</div></div>
+        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
       </div>
-    </section>
-
-    <!-- ============================================================
-         10) GALERIA  (carrossel premium — preparado p/ 10+ fotos)
-         TROCAR FOTOS: assets/galeria/foto-01.jpg ... duplique <figure> p/ adicionar.
-         ============================================================ -->
-    <section class="secao galeria" id="galeria">
-      <div class="container">
-        <div class="secao__cabecalho animar" data-animar>
-          <span class="secao__ornamento" aria-hidden="true"></span>
-          <h2 class="secao__titulo">Galeria</h2>
-          <p class="secao__subtitulo">
-            Alguns registros da nossa história e, em breve, também do grande dia.
-          </p>
-        </div>
-
-        <div class="carrossel carrossel--galeria animar" data-animar data-carrossel aria-roledescription="carrossel" aria-label="Galeria de fotos">
-          <div class="carrossel__janela">
-            <div class="carrossel__trilho" data-carrossel-trilho>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-01.jpg" alt="Foto da galeria 1" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 01</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-02.jpg" alt="Foto da galeria 2" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 02</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-03.jpg" alt="Foto da galeria 3" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 03</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-04.jpg" alt="Foto da galeria 4" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 04</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-05.jpg" alt="Foto da galeria 5" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 05</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-06.jpg" alt="Foto da galeria 6" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 06</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-07.jpg" alt="Foto da galeria 7" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 07</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-08.jpg" alt="Foto da galeria 8" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 08</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-09.jpg" alt="Foto da galeria 9" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 09</span></figure>
-              <figure class="carrossel__slide"><img class="moldura__img" data-src="assets/galeria/foto-10.jpg" alt="Foto da galeria 10" loading="lazy" /><span class="moldura__placeholder" aria-hidden="true">Foto 10</span></figure>
-            </div>
-          </div>
-          <button class="carrossel__seta carrossel__seta--ant" type="button" aria-label="Foto anterior" data-carrossel-ant>‹</button>
-          <button class="carrossel__seta carrossel__seta--prox" type="button" aria-label="Próxima foto" data-carrossel-prox>›</button>
-          <div class="carrossel__dots" data-carrossel-dots aria-hidden="true"></div>
-        </div>
+      <div class="gal-cell">
+        <div class="gal-cell-inner"><div class="gal-ph">imagem 04</div></div>
+        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
       </div>
-    </section>
-  </main>
+      <div class="gal-cell">
+        <div class="gal-cell-inner"><div class="gal-ph">imagem 05</div></div>
+        <div class="gal-over"><span class="gal-label">[legenda]</span></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ============================================================
-       RODAPÉ
-       ============================================================ -->
-  <footer class="rodape">
-    <div class="container">
-      <p class="rodape__nomes">Laura &amp; José</p>
-      <p class="rodape__texto">
-        Este site é um pedacinho da nossa história, preparado com carinho para viver esse dia ao lado de quem amamos.
-      </p>
-      <p class="rodape__mensagem">
-        Obrigado por orar, apoiar e caminhar conosco até aqui. Que Deus abençoe cada passo deste novo começo.
-      </p>
-      <span class="rodape__ornamento" aria-hidden="true"></span>
-      <p class="rodape__assinatura">15 de novembro de 2026 · Brusque/SC</p>
+  <!-- ════ DEPOIMENTOS ════ -->
+  <section id="depoimentos" class="marble-bg" aria-labelledby="depo-t">
+    <div class="depo-head">
+      <div class="reveal"><span class="eyebrow">O que dizem</span></div>
+      <div class="reveal d2"><h2 id="depo-t" class="title">Experiências <em>reais</em></h2></div>
+    </div>
+    <div class="depo-vp">
+      <div class="depo-track">
+        <article class="depo-card">
+          <span class="depo-q" aria-hidden="true">"</span>
+          <div class="depo-stars" aria-label="5 estrelas">★★★★★</div>
+          <p class="depo-text">Aqui entrará um depoimento real de uma paciente da clínica.</p>
+          <div class="depo-author"><div class="depo-av">—</div><div><div class="depo-name">[Nome]</div><div class="depo-proc">[Procedimento]</div></div></div>
+        </article>
+        <article class="depo-card">
+          <span class="depo-q" aria-hidden="true">"</span>
+          <div class="depo-stars" aria-label="5 estrelas">★★★★★</div>
+          <p class="depo-text">Aqui entrará um depoimento real de uma paciente da clínica.</p>
+          <div class="depo-author"><div class="depo-av">—</div><div><div class="depo-name">[Nome]</div><div class="depo-proc">[Procedimento]</div></div></div>
+        </article>
+        <article class="depo-card">
+          <span class="depo-q" aria-hidden="true">"</span>
+          <div class="depo-stars" aria-label="5 estrelas">★★★★★</div>
+          <p class="depo-text">Aqui entrará um depoimento real de uma paciente da clínica.</p>
+          <div class="depo-author"><div class="depo-av">—</div><div><div class="depo-name">[Nome]</div><div class="depo-proc">[Procedimento]</div></div></div>
+        </article>
+        <article class="depo-card">
+          <span class="depo-q" aria-hidden="true">"</span>
+          <div class="depo-stars" aria-label="5 estrelas">★★★★★</div>
+          <p class="depo-text">Aqui entrará um depoimento real de uma paciente da clínica.</p>
+          <div class="depo-author"><div class="depo-av">—</div><div><div class="depo-name">[Nome]</div><div class="depo-proc">[Procedimento]</div></div></div>
+        </article>
+      </div>
+    </div>
+    <div class="depo-nav reveal">
+      <button class="depo-btn depo-prev" aria-label="Anterior">←</button>
+      <button class="depo-btn depo-next" aria-label="Próximo">→</button>
+    </div>
+  </section>
+
+  <!-- ════ LOCALIZAÇÃO ════ -->
+  <section id="localizacao" aria-labelledby="loc-t">
+    <div class="loc-info reveal-l">
+      <span class="eyebrow">Onde estamos</span>
+      <h2 id="loc-t" class="title loc-title">Venha nos <em>visitar</em></h2>
+      <ul class="loc-list" role="list">
+        <li class="loc-item">
+          <div class="loc-ic">📍</div>
+          <div><div class="loc-k">Endereço</div><div class="loc-v">[endereço da clínica]</div></div>
+        </li>
+        <li class="loc-item">
+          <div class="loc-ic">🕐</div>
+          <div><div class="loc-k">Horário</div><div class="loc-v">[horário de atendimento]</div></div>
+        </li>
+        <li class="loc-item">
+          <div class="loc-ic">📞</div>
+          <div><div class="loc-k">Contato</div><div class="loc-v">[telefone / e-mail]</div></div>
+        </li>
+        <li class="loc-item">
+          <div class="loc-ic">🚗</div>
+          <div><div class="loc-k">Estacionamento</div><div class="loc-v">[informação a definir]</div></div>
+        </li>
+      </ul>
+    </div>
+    <div class="loc-map reveal-r"><span>📍</span><span>mapa será inserido aqui</span></div>
+  </section>
+
+  <!-- ════ CTA ════ -->
+  <section id="agendar" class="marble-bg" aria-labelledby="ag-t">
+    <div class="agendar-in">
+      <div class="reveal"><span class="eyebrow" style="justify-content:center;">Dê o primeiro passo</span></div>
+      <div class="reveal d2"><h2 id="ag-t" class="title agendar-title">Agende sua <em>consulta</em></h2></div>
+      <div class="reveal d3"><p class="body-text agendar-sub">Fale diretamente com nossa equipe pelo WhatsApp. Rápido, simples e sem complicação.</p></div>
+      <div class="agendar-acts reveal d4">
+        <a href="https://wa.me/5547990000000?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta." class="btn btn-fill" target="_blank" rel="noopener noreferrer">
+          <span>Agendar pelo WhatsApp</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:5547990000000" class="btn btn-line"><span>Ligar agora</span></a>
+      </div>
+      <p class="agendar-note reveal d5">[horário de atendimento]</p>
+    </div>
+  </section>
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="foot-top">
+      <div>
+        <div class="foot-name">Beleza com <em>Identidade</em></div>
+        <p class="foot-desc">Clínica de estética comprometida com resultado natural e atendimento humano.</p>
+      </div>
+      <div>
+        <p class="foot-ct">Navegação</p>
+        <ul class="foot-links" role="list">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#procedimentos">Procedimentos</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-ct">Procedimentos</p>
+        <ul class="foot-links" role="list">
+          <li><a href="#procedimentos">Procedimento 01</a></li>
+          <li><a href="#procedimentos">Procedimento 02</a></li>
+          <li><a href="#procedimentos">Procedimento 03</a></li>
+          <li><a href="#procedimentos">Procedimento 04</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot-ct">Contato</p>
+        <ul class="foot-links" role="list">
+          <li><a href="#localizacao">Endereço</a></li>
+          <li><a href="#localizacao">Telefone</a></li>
+          <li><a href="#agendar">Agendar consulta</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p class="foot-copy">© 2025 Beleza com Identidade. Todos os direitos reservados.</p>
+      <p class="foot-credit">Sistema por <span>JLBruns</span></p>
     </div>
   </footer>
 
-  <!-- Toast / mensagens ao usuário (preenchido via script.js) -->
-  <div class="toast" data-toast role="status" aria-live="polite"></div>
+  <!-- ════ WHATSAPP ════ -->
+  <a href="https://wa.me/5547990000000?text=Olá!%20Gostaria%20de%20saber%20mais." class="wa" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    <span class="wa-label">WhatsApp</span>
+  </a>
 
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>
