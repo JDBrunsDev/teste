@@ -2,101 +2,37 @@
 // BELEZA COM IDENTIDADE — script.js
 // ============================================================
 
-// ── HERO CANVAS: veios de mármore animados lentamente ──
-// Técnica: gradientes radiais claros sobre base off-white, com
-// movimento muito sutil. Evoca pedra polida, não "tela viva".
-(function marbleCanvas() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr;
-
-  // tons claros do mármore
-  const veins = [
-    { x: 0.20, y: 0.30, r: 0.6,  color: [221, 211, 196], phase: 0,   speed: 0.00010 },
-    { x: 0.75, y: 0.55, r: 0.55, color: [235, 228, 217], phase: 2.1, speed: 0.00012 },
-    { x: 0.55, y: 0.15, r: 0.45, color: [191, 163, 116], phase: 4.2, speed: 0.00008 },
-    { x: 0.40, y: 0.75, r: 0.5,  color: [246, 242, 236], phase: 1.0, speed: 0.00011 },
-  ];
-
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.offsetWidth; h = canvas.offsetHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function draw(t) {
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#F6F2EC';
-    ctx.fillRect(0, 0, w, h);
-
-    veins.forEach(v => {
-      const ox = Math.sin(t * v.speed + v.phase) * 0.05;
-      const oy = Math.cos(t * v.speed * 0.8 + v.phase) * 0.05;
-      const cx = (v.x + ox) * w;
-      const cy = (v.y + oy) * h;
-      const radius = v.r * Math.max(w, h);
-      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-      const [r, gg, b] = v.color;
-      g.addColorStop(0, `rgba(${r},${gg},${b},0.45)`);
-      g.addColorStop(1, `rgba(${r},${gg},${b},0)`);
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-      ctx.fill();
-    });
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  if (reduce) { draw(0); }
-  else { (function loop(t){ draw(t); requestAnimationFrame(loop); })(0); }
-})();
-
-// ── CURSOR CUSTOM ──
-(function cursor() {
-  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
-  const c = document.querySelector('.cursor');
-  const d = document.querySelector('.cursor-dot');
-  if (!c || !d) return;
-  let mx = 0, my = 0, cx = 0, cy = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    d.style.left = mx + 'px'; d.style.top = my + 'px';
-  });
-  (function follow(){ cx += (mx-cx)*0.18; cy += (my-cy)*0.18; c.style.left = cx+'px'; c.style.top = cy+'px'; requestAnimationFrame(follow); })();
-  document.querySelectorAll('a, button, .proc-card, .gal-cell, .depo-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => c.classList.add('hover'));
-    el.addEventListener('mouseleave', () => c.classList.remove('hover'));
-  });
-  document.addEventListener('mouseleave', () => { c.style.opacity='0'; d.style.opacity='0'; });
-  document.addEventListener('mouseenter', () => { c.style.opacity='1'; d.style.opacity='1'; });
-})();
-
 // ── NAV scroll ──
 const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
-// ── DRAWER ──
-(function drawer() {
-  const b = document.querySelector('.burger');
-  const dr = document.querySelector('.drawer');
-  if (!b || !dr) return;
-  b.addEventListener('click', () => {
-    const open = dr.classList.toggle('open');
-    b.setAttribute('aria-expanded', open);
+// ── NAV burger / drawer (corrigido) ──
+(function drawerNav() {
+  const burger = document.querySelector('.burger');
+  const drawer = document.querySelector('.drawer');
+  if (!burger || !drawer) return;
+
+  function close() {
+    drawer.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  burger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    burger.classList.toggle('active', open);
+    burger.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
   });
-  dr.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    dr.classList.remove('open'); document.body.style.overflow = '';
-  }));
+
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 
-// ── REVEAL ──
+// ── SCROLL REVEAL ──
 (function reveal() {
   const els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
   const obs = new IntersectionObserver(es => {
@@ -105,7 +41,7 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.
   els.forEach(el => obs.observe(el));
 })();
 
-// ── CARROSSEL ──
+// ── DEPOIMENTOS carrossel ──
 (function carousel() {
   const track = document.querySelector('.depo-track');
   const prev = document.querySelector('.depo-prev');
@@ -132,19 +68,78 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.
   }, { passive: true });
 })();
 
-// ── CONTADOR ──
-(function counter() {
-  function anim(el, target) {
-    const dur = 1800, start = performance.now();
-    (function step(now){
-      const p = Math.min((now-start)/dur, 1);
-      const e = 1 - Math.pow(1-p, 3);
-      el.textContent = Math.round(e * target);
-      if (p < 1) requestAnimationFrame(step);
-    })(start);
+// ── GALERIA: lightbox antes/depois ──
+(function lightbox() {
+  const cards = Array.from(document.querySelectorAll('.gal-card'));
+  const lb = document.querySelector('.lightbox');
+  if (!lb || cards.length === 0) return;
+
+  const stage   = lb.querySelector('.lb-stage');
+  const caption = lb.querySelector('.lb-caption');
+  const counter = lb.querySelector('.lb-counter');
+  const btnClose = lb.querySelector('.lb-close');
+  const btnPrev  = lb.querySelector('.lb-prev');
+  const btnNext  = lb.querySelector('.lb-next');
+
+  // dados extraídos dos cards (placeholder agora; trocar por <img> reais depois)
+  const items = cards.map(card => ({
+    label: card.dataset.label || '',
+    antes: card.dataset.antes || 'antes',
+    depois: card.dataset.depois || 'depois',
+  }));
+
+  let current = 0;
+
+  function render(i) {
+    const it = items[i];
+    stage.innerHTML = `
+      <div class="lb-half">
+        <span class="lb-tag l">Antes</span>
+        <div class="lb-ph antes">${it.antes}</div>
+      </div>
+      <div class="lb-half">
+        <span class="lb-tag r">Depois</span>
+        <div class="lb-ph depois">${it.depois}</div>
+      </div>
+      <div class="lb-divider"></div>
+    `;
+    caption.textContent = it.label;
+    counter.textContent = `${i + 1} / ${items.length}`;
   }
-  const obs = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { anim(e.target, parseInt(e.target.dataset.count,10)); obs.unobserve(e.target); } });
-  }, { threshold: 0.6 });
-  document.querySelectorAll('[data-count]').forEach(el => obs.observe(el));
+
+  function open(i) {
+    current = i;
+    render(current);
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function go(dir) {
+    current = (current + dir + items.length) % items.length;
+    render(current);
+  }
+
+  cards.forEach((card, i) => card.addEventListener('click', () => open(i)));
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => go(-1));
+  btnNext.addEventListener('click', () => go(1));
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+
+  // swipe no lightbox
+  let sx = 0;
+  lb.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = sx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) go(dx > 0 ? 1 : -1);
+  }, { passive: true });
 })();
